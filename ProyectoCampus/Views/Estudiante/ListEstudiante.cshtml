@@ -1,0 +1,56 @@
+﻿@model IEnumerable<ProyectoCampus.Entities.EstudianteObj>
+
+@{
+    ViewData["Title"] = "Estudiantes";
+}
+
+<h1 style="color:white;">Estudiantes</h1>
+
+<a asp-action="CreateEstudiante"><button type="button" class="btn btn-primary">Registrar Nuevo</button></a>
+<br>
+<br>
+
+<table class="table" id="dataTable" style="color:white;">
+    <thead>
+        <tr>
+            <th>
+                Cédula
+            </th>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Primer Apellido
+            </th>
+            <th>
+                Segundo Apellido
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr style="color:black;">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cedula)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Apellido1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Apellido2)
+                </td>
+                <td>
+                    <a href='@Url.Action("EditEstudiante", "Estudiante", new { idEstudiante = item.idEstudiante})'>
+                        <button type="button" class="btn btn-success"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                    </a> |
+                    <button type="button" class="btn btn-danger" id="btnTR" onclick="DltEstudiante(this, @item.idEstudiante)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

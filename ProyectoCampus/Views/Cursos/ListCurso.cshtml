@@ -1,0 +1,68 @@
+﻿@model IEnumerable<ProyectoCampus.Entities.CursosObj>
+
+@{
+    ViewData["Title"] = "Cursos";
+}
+
+<h1 style="color:white;">Cursos</h1>
+
+<a asp-action="CreateCurso"><button type="button" class="btn btn-primary">Registrar Nuevo</button></a>
+<br>
+<br>
+
+<table class="table" id="dataTable" style="color:white;">
+    <thead>
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Créditos
+            </th>
+            <th>
+                Carrera
+            </th>
+            <th>
+                Nombre Profesor
+            </th>
+            <th>
+                Cupos Disponibles
+            </th>
+            <th>
+                Horarios
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr style="color:black;">
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.creditos)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.carrera)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombreProfesor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cuposDisponibles)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.horario)
+                </td>
+                <td>
+                    <a href='@Url.Action("EditCurso", "Cursos", new { idCurso = item.idCurso})'>
+                        <button type="button" class="btn btn-success"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                    </a> |
+                    <button type="button" class="btn btn-danger" id="btnTR" onclick="DltCurso(this, @item.idCurso)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

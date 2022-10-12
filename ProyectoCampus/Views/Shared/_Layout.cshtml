@@ -1,0 +1,303 @@
+﻿@using Microsoft.AspNetCore.Http
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Universidad - @ViewData["Title"]</title>
+
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ProyectoCampus.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/DataTables/Datatables.css" asp-append-version="true" />
+
+    <!-- favicon
+        ============================================ -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/img_admin/favicon.ico">
+    <!-- Google Fonts
+        ============================================ -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
+    <!-- Bootstrap CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/css_admin/bootstrap.min.css">
+    <!-- Bootstrap CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/css_admin/font-awesome.min.css">
+    <!-- nalika Icon CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/css_admin/nalika-icon.css">
+    <!-- owl.carousel CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/css_admin/owl.carousel.css">
+    <link rel="stylesheet" href="~/css_admin/owl.theme.css">
+    <link rel="stylesheet" href="~/css_admin/owl.transitions.css">
+    <!-- animate CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/css_admin/animate.css">
+    <!-- normalize CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/css_admin/normalize.css">
+    <!-- meanmenu icon CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/css_admin/meanmenu.min.css">
+    <!-- main CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/css_admin/main.css">
+    <!-- morrisjs CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/css_admin/morrisjs/morris.css">
+    <!-- mCustomScrollbar CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/css_admin/scrollbar/jquery.mCustomScrollbar.min.css">
+    <!-- metisMenu CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/css_admin/metisMenu/metisMenu.min.css">
+    <link rel="stylesheet" href="~/css_admin/metisMenu/metisMenu-vertical.css">
+    <!-- calendar CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/css_admin/calendar/fullcalendar.min.css">
+    <link rel="stylesheet" href="~/css_admin/calendar/fullcalendar.print.min.css">
+    <!-- style CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/style.css">
+    <!-- responsive CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/css_admin/responsive.css">
+    <!-- modernizr JS
+        ============================================ -->
+    <script src="~/js_admin/vendor/modernizr-2.8.3.min.js"></script>
+
+</head>
+
+<body>
+    <div class="left-sidebar-pro">
+        <nav id="sidebar" class="">
+
+            <div class="sidebar-header">
+                <a asp-area="" asp-controller="Home" asp-action="Index"><img class="main-logo" src="~/img_admin/logo/logo.png" alt="" /></a>
+                <strong style="width: 100%;height: auto;"><img src="~/img_admin/logo/logo.png" alt="" /></strong>
+            </div>
+
+            <div class="profile-dtl">
+                <a asp-area="" asp-controller="Home" asp-action="Profile"><img src="~/img_admin/user.png" alt="" style="width: 35%;height: auto;" /></a>
+                <h2 style="font-weight:bold">@Context.Session.GetString("Nombre")</h2>
+            </div>
+
+
+            <div class="left-custom-menu-adp-wrap comment-scrollbar">
+                <nav class="sidebar-nav left-sidebar-menu-pro">
+                    <ul class="metismenu" id="menu1">
+                        <li class="active">
+
+                            @if (@Context.Session.GetString("Rol") == "Profesor")
+                            {
+                                <a class="has-arrow" asp-area="" asp-controller="Estudiante" asp-action="ListEstudiante">
+                                    <i class="icon nalika-user icon-wrap"></i>
+                                    <span class="mini-click-non">Gestor de Estudiantes</span>
+                                </a>
+                                <a class="" asp-area="" asp-controller="Profesor" asp-action="ListProfesor">
+                                    <i class="icon nalika-team icon-wrap"></i>
+                                    <span class="mini-click-non">Gestor de Profesores</span>
+                                </a>
+                                <a class="" asp-area="" asp-controller="Matricula" asp-action="ListMatricula">
+                                    <i class="icon nalika-forms icon-wrap"></i>
+                                    <span class="mini-click-non">Gestor de Matrículas</span>
+                                </a>
+                                <a class="" asp-area="" asp-controller="Cursos" asp-action="ListCurso">
+                                    <i class="icon nalika-ppt icon-wrap"></i>
+                                    <span class="mini-click-non">Gestor de Cursos</span>
+                                </a>
+                            }
+                            else if (Context.Session.GetString("Rol") == "Estudiante")
+                            {
+                                <a class="" asp-area="" asp-controller="Matricula" asp-action="MatriculasEstudiante">
+                                    <i class="icon nalika-ppt icon-wrap"></i>
+                                    <span class="mini-click-non">Matrículas</span>
+                                </a>
+                            }
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </nav>
+    </div>
+
+    <div class="all-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="logo-pro">
+                        <a asp-area="" asp-controller="Home" asp-action="Index"><img class="main-logo" src="~/img_admin/logo/logo.png" alt="" /></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-advance-area">
+            <div class="header-top-area">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="header-top-wraper">
+                                <div class="row">
+                                    <div class="col-lg-1 col-md-0 col-sm-1 col-xs-12">
+                                        <div class="menu-switcher-pro">
+                                            <button type="button" id="sidebarCollapse" class="btn bar-button-pro header-drl-controller-btn btn-info navbar-btn">
+                                                <i class="icon nalika-menu-task"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-7 col-sm-6 col-xs-12">
+                                        <div class="header-top-menu tabl-d-n">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                                        <div class="header-right-info">
+                                            <ul class="nav navbar-nav mai-top-nav header-right-menu">
+                                                @if (@Context.Session.GetString("Cedula") != null)
+                                                {
+                                                    <li class="nav-item">
+                                                        <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                                                            <i class="icon nalika-user"></i>
+                                                            <span class="admin-name">@Context.Session.GetString("Nombre")</span>
+                                                        </a>
+                                                        <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
+                                                            <li> <a asp-area="" asp-controller="Home" asp-action="Profile"><span class="icon nalika-user author-log-ic"></span>Perfil</a></li>
+                                                            <li><a asp-area="" asp-controller="Login" asp-action="LogOff"><span class="icon nalika-exit author-log-ic"></span> Cerrar Sesión</a></li>
+                                                        </ul>
+                                                    </li>
+                                                }
+                                                else
+                                                {
+                                                    <li class="nav-item">
+                                                    <li>
+                                                        <a asp-area="" asp-controller="Login" asp-action="Login"><span class="icon nalika-next author-log-ic"></span> Iniciar Sesión</a>
+                                                    </li>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="breadcome-area">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="breadcome-list">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <div class="breadcomb-wp">
+                                            <div class="breadcomb-icon">
+                                                <i class="icon nalika-home"></i>
+                                            </div>
+                                            <div class="breadcomb-ctn">
+                                                <h2>Sistema Universidad</h2>
+                                                <p>Bienvenido al Sistema de Gestión</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <div class="footer-copyright-area">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer-copy-right">
+                        <p>&copy; 2022 - Sistema Universidad | Proyecto Progra Avanzada Web</p>
+                        <p>Plantilla por: © 2018 <a href="https://colorlib.com/wp/templates/">Colorlib</a> | Todos los derechos reservados</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+
+    <!-- jquery
+    ============================================ -->
+    <script src="~/js_admin/vendor/jquery-1.12.4.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.9/dist/sweetalert2.all.min.js"></script>
+
+    <script src="~/js/FormValidator.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/AJAXDelete.js" asp-append-version="true"></script>
+
+    <!-- bootstrap JS
+        ============================================ -->
+    <script src="~/js_admin/bootstrap.min.js"></script>
+    <!-- wow JS
+        ============================================ -->
+    <script src="~/js_admin/wow.min.js"></script>
+    <!-- price-slider JS
+        ============================================ -->
+    <script src="~/js_admin/jquery-price-slider.js"></script>
+    <!-- meanmenu JS
+        ============================================ -->
+    <script src="~/js_admin/jquery.meanmenu.js"></script>
+    <!-- owl.carousel JS
+        ============================================ -->
+    <script src="~/js_admin/owl.carousel.min.js"></script>
+    <!-- sticky JS
+        ============================================ -->
+    <script src="~/js_admin/jquery.sticky.js"></script>
+    <!-- scrollUp JS
+        ============================================ -->
+    <script src="~/js_admin/jquery.scrollUp.min.js"></script>
+    <!-- mCustomScrollbar JS
+        ============================================ -->
+    <script src="~/js_admin/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="~/js_admin/scrollbar/mCustomScrollbar-active.js"></script>
+    <!-- metisMenu JS
+        ============================================ -->
+    <script src="~/js_admin/metisMenu/metisMenu.min.js"></script>
+    <script src="~/js/metisMenu/metisMenu-active.js"></script>
+    <!-- sparkline JS
+        ============================================ -->
+    <script src="~/js_admin/sparkline/jquery.sparkline.min.js"></script>
+    <script src="~/js_admin/sparkline/jquery.charts-sparkline.js"></script>
+    <!-- calendar JS
+        ============================================ -->
+    <script src="~/js_admin/calendar/moment.min.js"></script>
+    <script src="~/js_admin/calendar/fullcalendar.min.js"></script>
+    <script src="~/js_admin/calendar/fullcalendar-active.js"></script>
+    <!-- float JS
+        ============================================ -->
+    <script src="~/js_admin/flot/jquery.flot.js"></script>
+    <script src="~/js_admin/flot/jquery.flot.resize.js"></script>
+    <script src="~/js_admin/flot/curvedLines.js"></script>
+    <script src="~/js_admin/flot/flot-active.js"></script>
+    <!-- plugins JS
+        ============================================ -->
+    <script src="~/js_admin/plugins.js"></script>
+    <!-- main JS
+        ============================================ -->
+    <script src="~/js_admin/main.js"></script>
+
+    <script src="~/DataTables/Datatables.js" asp-append-version="true"></script>
+    <script src="~/DataTables/DatatableInit.js" asp-append-version="true"></script>
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>

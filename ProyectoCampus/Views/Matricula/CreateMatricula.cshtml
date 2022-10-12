@@ -1,0 +1,43 @@
+﻿@model ProyectoCampus.Entities.MatriculaObj
+
+@{
+    ViewData["Title"] = "Matrículas";
+}
+
+<h1 style="color:white;">Registrar Matrícula</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-4" style="color:white;">
+
+        @using (Html.BeginForm("CreateMatricula", "Matricula", FormMethod.Post))
+        {
+            <div class="form-group">
+                Monto Matricula
+                @Html.TextBoxFor(model => model.MontoMatricula ,new {@class = "form-control numeric", @style="background-color: white;color: black"})
+                @Html.HiddenFor(model => model.idMatricula)
+            </div>
+            <div class="form-group">
+                Cedula Estudiante
+                @Html.DropDownListFor(Model => Model.idEstudiante, ViewBag.Estudiantes as List<SelectListItem>, new { @Class = "form-control" })
+            </div>
+            <div class="form-group">
+                Curso
+                @Html.DropDownListFor(Model => Model.idCurso, ViewBag.Cursos as List<SelectListItem>, new { @Class = "form-control" })
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Registrar" class="btn btn-primary submitBTN" />
+            </div>
+        }
+    </div>
+</div>
+
+<a href='@Url.Action("ListMatricula", "Matricula")'>
+    <button type="button" class="btn btn-light"><i class="fa fa-arrow-left" aria-hidden="true"></i> Regresar a la lista</button>
+</a>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

@@ -1,0 +1,49 @@
+﻿@model ProyectoCampus.Entities.ProfesorObj
+
+@{
+    ViewData["Title"] = "Profesores";
+}
+
+<h1 style="color:white;">Registrar Profesor</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4" style="color:white;">
+
+        @using (Html.BeginForm("CreateProfesor", "Profesor", FormMethod.Post))
+        {
+            <div class="form-group">
+                Cédula
+                @Html.TextBoxFor(model => model.Cedula ,new {@class = "form-control", @style="background-color: white;color: black"})
+            </div>
+            <div class="form-group">
+                Nombre
+                @Html.TextBoxFor(model => model.Nombre ,new {@class = "form-control", @style="background-color: white;color: black"})
+            </div>
+            <div class="form-group">
+                Primer Apellido
+                @Html.TextBoxFor(model => model.Apellido ,new {@class = "form-control", @style="background-color: white;color: black"})
+            </div>
+            <div class="form-group">
+                Segundo Apellido
+                @Html.TextBoxFor(model => model.Apellido2 ,new {@class = "form-control", @style="background-color: white;color: black"})
+            </div>
+            <div class="form-group">
+                Contraseña
+                @Html.PasswordFor(model => model.contraseña ,new {@class = "form-control", @style="background-color: white;color: black"})
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Registrar" class="btn btn-primary submitBTN" />
+            </div>
+        }
+    </div>
+</div>
+
+<a href='@Url.Action("ListProfesor", "Profesor")'>
+    <button type="button" class="btn btn-light"><i class="fa fa-arrow-left" aria-hidden="true"></i> Regresar a la lista</button>
+</a>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

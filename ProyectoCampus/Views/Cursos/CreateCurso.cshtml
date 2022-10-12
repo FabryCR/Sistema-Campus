@@ -1,0 +1,57 @@
+﻿@model ProyectoCampus.Entities.CursosObj
+
+@{
+    ViewData["Title"] = "Cursos";
+}
+
+<h1 style="color:white;">Registrar Curso</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-4" style="color:white;">
+
+        @using (Html.BeginForm("CreateCurso", "Cursos", FormMethod.Post))
+        {
+
+            <div class="form-group">
+                Nombre
+                @Html.TextBoxFor(model => model.nombre ,new {@class = "form-control", @style="background-color: white;color: black"})
+                @Html.HiddenFor(model => model.idCurso)
+            </div>
+            <div class="form-group">
+                Créditos
+                @Html.TextBoxFor(model => model.creditos ,new {@class = "form-control numeric", @style="background-color: white;color: black"})
+            </div>
+            <div class="form-group">
+                Carrera
+                @Html.TextBoxFor(model => model.carrera ,new {@class = "form-control", @style="background-color: white;color: black"})
+            </div>
+            <div class="form-group">
+                Nombre Profesor
+                @Html.DropDownListFor(Model => Model.idProfesor, ViewBag.Profesores as List<SelectListItem>, new { @Class = "form-control" })
+            </div>
+            <div class="form-group">
+                Cupos Disponibles
+                @Html.TextBoxFor(model => model.cuposDisponibles ,new {@class = "form-control numeric", @style="background-color: white;color: black"})
+            </div>
+            <div class="form-group">
+                Horario
+                @Html.TextBoxFor(model => model.horario ,new {@class = "form-control", @style="background-color: white;color: black"})
+            </div>
+            <br>
+            <div class="form-group">
+                <input type="submit" value="Registrar" class="btn btn-primary submitBTN" />
+            </div>
+        }
+    </div>
+</div>
+
+<a href='@Url.Action("ListCurso", "Cursos")'>
+    <button type="button" class="btn btn-light"><i class="fa fa-arrow-left" aria-hidden="true"></i> Regresar a la lista</button>
+</a>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

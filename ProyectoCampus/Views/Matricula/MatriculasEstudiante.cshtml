@@ -1,0 +1,42 @@
+﻿@model IEnumerable<ProyectoCampus.Entities.MatriculaObj>
+
+@{
+    ViewData["Title"] = "Matrículas";
+}
+
+<h1 style="color:white;">Matrículas</h1>
+
+<br>
+<br>
+
+<table class="table" id="dataTable" style="color:white;">
+    <thead>
+        <tr>
+            <th>
+                Monto Matricula
+            </th>
+            <th>
+                Fecha Matricula
+            </th>
+            <th>
+                Nombre Curso
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr style="color:black;">
+                <td>
+                    @Html.DisplayFor(modelItem => item.MontoMatricula) ₡
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fechaMatricula)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombreCurso)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

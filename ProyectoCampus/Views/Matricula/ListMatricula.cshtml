@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ProyectoCampus.Entities.MatriculaObj>
+
+@{
+    ViewData["Title"] = "Matrículas";
+}
+
+<h1 style="color:white;">Matrículas</h1>
+
+<a asp-action="CreateMatricula"><button type="button" class="btn btn-primary">Registrar Nuevo</button></a>
+<br>
+<br>
+
+<table class="table" id="dataTable" style="color:white;">
+    <thead>
+        <tr>
+            <th>
+                Monto Matricula
+            </th>
+            <th>
+                Fecha Matricula
+            </th>
+            <th>
+                Nombre Estudiante
+            </th>
+            <th>
+                Cédula Estudiante
+            </th>
+            <th>
+                Nombre Curso
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr style="color:black;">
+                <td>
+                    @Html.DisplayFor(modelItem => item.MontoMatricula) ₡
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fechaMatricula)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombreEstudiante)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cedulaEstudiante)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombreCurso)
+                </td>
+                <td>
+                    <a href='@Url.Action("EditMatricula", "Matricula", new { idMatricula = item.idMatricula})'>
+                        <button type="button" class="btn btn-success"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                    </a> |
+                    <button type="button" class="btn btn-danger" id="btnTR" onclick="DltMatricula(this, @item.idMatricula)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
